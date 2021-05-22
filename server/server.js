@@ -4,8 +4,11 @@ const app = express(); // save express property methods to variable app
 const port = 3000; // set port to 3000
 const path = require('path');
 const dbModels = require('./models/dbModels')
+const apiRouter = require('./routes/database')
+const yelpSearchAPI = 'https://api.yelp.com/v3/businesses/search';
+const yelpDetailsAPI = 'https://api.yelp.com/v3/businesses/';
 
-const user = dbModels.User;
+
 
 
 if (process.env.NODE_ENV === 'production'){
@@ -13,6 +16,10 @@ if (process.env.NODE_ENV === 'production'){
   // https://expressjs.com/en/starter/static-files.html
 
   // serve index.html on the route '/'
+
+  //body parser
+  app.use(express.json());
+
 
   //NOTE: YOU MUST USE APP.USE() WHEN SERVING STATIC FILES, APP.GET() WILL NOT WORK IN THIS CASE AND THE REQUEST WILL NOT BE HANDLED.
   app.use('/build', express.static(path.join(__dirname, '../build')));

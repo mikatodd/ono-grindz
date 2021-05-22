@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const MONGO_URI = 'mongodb+srv://onoGrindz:onoGrindz@onogrindz.kgcfk.mongodb.net/retryWrites=true&w=majority'
-
-//mongodb+srv://onoGrindz:<password>@onogrindz.kgcfk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+const MONGO_URI = 'mongodb+srv://onoGrindz:onoGrindz@onogrindz.kgcfk.mongodb.net/retryWrites=true&w=majority';
 
 // establishing connection to MongoDB
 mongoose.connect(MONGO_URI, {
@@ -21,6 +19,7 @@ mongoose.connect(MONGO_URI, {
   });
 
   const restaurantSchema = new Schema({
+    id: { type: String},
     name: { type: String, required: true },
     display_phone: { type: String },
     location: {
