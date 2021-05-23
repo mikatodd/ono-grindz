@@ -1,4 +1,5 @@
 const path = require('path'); // import NodeJS path module for resolving and joining path directories
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
   entry: './client/index.js', // set the 'entry' file or beginning point for webpack to begin transpiling
@@ -6,6 +7,8 @@ module.exports = {
     filename: 'bundle.js',    // set the name of the 'bundled' file where webpack will bundle JS and CSS files, transpile React JSX syntax, transpile ES6/7/8 code to ES5 readabable code, transpile SCSS to CSS, etc.
     path: path.resolve(__dirname, 'build'), // using path module, tell webpack where the bundle file should be stored
   },
+  plugins: [ new NodePolyfillPlugin()]
+  ,
   devServer: {
     // https://webpack.js.org/configuration/dev-server/#devserverpublicpath-
     publicPath: '/build/',

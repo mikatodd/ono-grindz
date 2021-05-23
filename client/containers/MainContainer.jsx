@@ -4,8 +4,9 @@ import DisplayContainer from './DisplayContainer.jsx';
 
 const MainContainer = () => {
 
-  const [restaurants, setRestaurants] = useState([]);
+  const [restaurants, setRestaurants] = useState({});
   const [email, setEmail] = useState('');
+  const [location, setLocation] = useState('');
 
   return (
     <div>
