@@ -29,13 +29,14 @@ searchControllers.sendUserSearch = (req, res, next) => {
     const { businesses } = data;
     const results = businesses.map(obj => obj.id)
     res.locals.ids = results;
-    next()
+    return next(); // invoking the next callback function
   })
   .catch(err => {
-    next('Error: error in searchControllers.sendUserSearch')
-    console.log(err, 'error')
+    return next('Error: error in searchControllers.sendUserSearch')
   })
+
 };
+
 
 const functionWithPromise = item => {
   return Promise.resolve(item)
@@ -54,7 +55,7 @@ searchControllers.sendID = (req, res, next) => {
      }
      //console.log('THIS IS OBJ',obj)
       res.locals.details = obj;
-      next()
+      return next()
     })
     .catch((err)=>{
       console.log(err, 'error')
