@@ -2,10 +2,10 @@ const express = require('express');
 const searchControllers = require('../controllers/searchControllers');
 const router = express.Router();
 
-router.get('/search',
+router.post('/search',
   searchControllers.sendUserSearch,
   searchControllers.sendID,
- (req, res) => {
+  (req, res) => {
     const { details } = res.locals;
     return res.status(200).json({ details })
   }
