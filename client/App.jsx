@@ -8,7 +8,7 @@ const App = (props) => {
 
   return (
     <div>
-      <TempComponent1></TempComponent1>
+      {/* <TempComponent1></TempComponent1> */}
       <MainContainer />
     </div>
   )
