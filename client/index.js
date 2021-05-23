@@ -7,12 +7,12 @@ import App from './App.jsx';
 // Index.js is going to render our top-level component (App.jsx)
 // Component Structure
 // - App 
-// - MainContainer
-// - SearchContainer
-//   - SearchCreator
-// - DisplayContainer
-//   - Restaurants
-//     - Restaurant
+  // - MainContainer
+  // - SearchContainer
+  //   - SearchCreator
+  // - DisplayContainer
+  //   - Restaurants
+  //     - Restaurant
 
 render(
   <div>
