@@ -29,10 +29,12 @@
   },
   "dependencies": {
     "express": "^4.17.1",
+    "graphql": "^15.5.0",
     "lodash": "^4.17.21",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.10",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "yelp-fusion": "^3.0.0"
   }
 }

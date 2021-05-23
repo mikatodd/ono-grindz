@@ -13,7 +13,7 @@ module.exports = {
     port: 8080,
     proxy: {
       //NOTE: add additional routes that we want the 3000 server to respond to, right now only requests to "localhost:8080:/database" will be re-routed to 3000.
-      '/database': 'http://localhost:3000'
+      '/api': 'http://localhost:3000'
     },
   },
   module: {
