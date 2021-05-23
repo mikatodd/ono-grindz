@@ -81,7 +81,7 @@ const SearchCreator = (props) => {
 
   return (
     <div>
-      <h1>Search Creator</h1>
+      {/* <h1>Search Creator</h1> */}
       <form>
         <label>
           Category:
@@ -96,7 +96,7 @@ const SearchCreator = (props) => {
           <input type="text" id="email" />
         </label>
 
-        <input type="button" onClick={handleClick} />
+        <input type="button" value="Submit" onClick={handleClick} />
       </form>
 
       <DisplayContainer />
