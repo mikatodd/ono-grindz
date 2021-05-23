@@ -4,7 +4,7 @@ const DisplayContainer = () => {
 
   return (
     <div>
-      <h1>Display Container</h1>
+      {/* <h1>Display Container</h1> */}
     </div>
   )
 }

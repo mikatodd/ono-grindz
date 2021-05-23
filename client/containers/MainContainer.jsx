@@ -9,6 +9,7 @@ const MainContainer = () => {
 
   return (
     <div>
+      <h1>Ono Grindz</h1>
       <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
       <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
     </div>
