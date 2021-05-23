@@ -7,6 +7,8 @@ const MainContainer = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [email, setEmail] = useState('');
 
+  console.log(restaurants);
+  console.log(restaurants === undefined);
   return (
     <div>
       <h1>Ono Grindz</h1>

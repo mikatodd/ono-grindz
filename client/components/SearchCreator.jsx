@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import DisplayContainer from '../containers/DisplayContainer.jsx';
 const Stream = require('stream');
 
 const SearchCreator = (props) => {
@@ -74,7 +73,8 @@ const SearchCreator = (props) => {
         const parsedResults = JSON.parse(result);
         console.log(parsedResults);
         // use the setRestaurants hook to update the MainContainer's local state variable restaurants
-        props.setRestaurants(parsedResults);
+        const { details } = parsedResults;
+        props.setRestaurants(details);
       })
       .catch((err) => console.log('Error', err));
   }
@@ -98,8 +98,6 @@ const SearchCreator = (props) => {
 
         <input type="button" value="Submit" onClick={handleClick} />
       </form>
-
-      <DisplayContainer />
     </div>
   )
 }
