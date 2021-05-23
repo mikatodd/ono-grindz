@@ -8,8 +8,9 @@ const Restaurants = (props) => {
   })
   return (
     <div>
-      Restaurants
-      {restaurants}
+      <div className = "cardContainer">
+        {restaurants}
+      </div>
     </div>
   )
 }
