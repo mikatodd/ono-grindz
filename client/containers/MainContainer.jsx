@@ -6,13 +6,15 @@ const MainContainer = () => {
 
   const [restaurants, setRestaurants] = useState({});
   const [email, setEmail] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(  {lat: 34.0522342,
+    lng: -118.2436849});
 
+  
   return (
     <div>
       <h1>Ono Grindz</h1>
-      <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
-      <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
+      <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation}/>
+      <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation} />
     </div>
   )
 }
