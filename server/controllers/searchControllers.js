@@ -10,6 +10,8 @@ const searchControllers = {};
 
 //get request to Yelp API for business IDs
 searchControllers.sendUserSearch = (req, res, next) => {
+  console.log('USER SEARCH HIT!');
+  console.log(req.body);
   let { location, categories } = req.body;
   location = location.toLowerCase();
   categories = categories.toLowerCase();
@@ -18,7 +20,7 @@ searchControllers.sendUserSearch = (req, res, next) => {
     term: 'restaurants',
     location: location,
     categories: categories,
-    limit: 5,
+    limit: 6,
   })
   .then((data) => {
     return JSON.parse(data.body);
@@ -30,6 +32,7 @@ searchControllers.sendUserSearch = (req, res, next) => {
     next()
   })
   .catch(err => {
+    next('Error: error in searchControllers.sendUserSearch')
     console.log(err, 'error')
   })
 };
