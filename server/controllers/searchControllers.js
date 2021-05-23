@@ -10,12 +10,15 @@ const searchControllers = {};
 
 //get request to Yelp API for business IDs
 searchControllers.sendUserSearch = (req, res, next) => {
-  // const { location, category } = req.body
+  let { location, categories } = req.body;
+  location = location.toLowerCase();
+  categories = categories.toLowerCase();
+  console.log(req.body);
   client.search({
     term: 'restaurants',
-    location: 'Lake Forest, CA',
-    category: 'Sushi',
-    limit: 2,
+    location: location,
+    categories: categories,
+    limit: 5,
   })
   .then((data) => {
     return JSON.parse(data.body);

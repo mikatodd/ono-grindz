@@ -4,22 +4,22 @@ const Stream = require('stream');
 
 const SearchCreator = (props) => {
 
-  const [category, setCategory] = useState('');
+  const [categories, setCategory] = useState('');
   const [location, setLocation] = useState('');
 
 
   const handleClick = (event) => {
-    const category = document.getElementById('category').value
+    const categories = document.getElementById('category').value
     const location = document.getElementById('location').value
     const email = document.getElementById('email').value
 
-    setCategory(category);
+    setCategory(categories);
     setLocation(location);
     props.setEmail(email);
-    const body = { category, location, email }
-
-
-    console.log(category);
+    const body = { categories, location, email }
+    
+    console.log(body);
+    console.log(categories);
     console.log(location);
     console.log(email);
     event.preventDefault();
@@ -28,7 +28,8 @@ const SearchCreator = (props) => {
     // send a fetch request once the button has been clicked, send our details in the body
     fetch('/api/search', {
       method: 'POST',
-      body: body
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(body),
     })
       .then((response) => response.body)
       .then((body) => {
