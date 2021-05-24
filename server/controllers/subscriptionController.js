@@ -72,6 +72,7 @@ subscriptionController.getDetails = (req, res, next) => {
 
 subscriptionController.scheduleEmails = (req, res, next) => {
   
+  // specific restaurant details pulled from getDetails
   const { details } = res.locals;
   const restaurants = Object.keys(details);
   const customerEmail = req.body.email;
@@ -94,10 +95,10 @@ subscriptionController.scheduleEmails = (req, res, next) => {
     // store start and end times in variables
 
     const mailOptions = {
-      from: 'contact.onogainz@gmail.com',
+      from: 'csbigtassels@gmail.com',
       to: customerEmail,
-      subject: `Ono-Gainz: ${name} is closing soon (${end})!`,
-      html: (`<div><h1>${name} is closing in 1 hour!!</h1><h2>Get your gainz before it\'s too late!</h2><p>${address1}, ${city}</p><p>${display_phone}</p><p>${schedule[0]} - ${schedule[1]}</p></div>`)
+      subject: `Ono-Grindz: ${name} is closing soon (${end})!`,
+      html: (`<div><h1>${name} is closing in 1 hour!!</h1><h2>Get your grindz before it\'s too late!</h2><p>${address1}, ${city}</p><p>${display_phone}</p><p>${schedule[0]} - ${schedule[1]}</p></div>`)
     }
 
     let hrs = hours[0].open[day].end.substring(0, 2);
@@ -115,6 +116,8 @@ subscriptionController.scheduleEmails = (req, res, next) => {
     // Cron syntax
     // '*     *     *     *     *     *'
     // secs  mins  hrs  days  month  dayofweek(sun-sat, 0 - 6)
+    // 00 00 16 * * *
+    // send at 4:00:00PM every day, of every month, every day of the week
     const job = new CronJob(`00 ${mins} ${hrs} * * *`, () => {
       transporter.sendMail(mailOptions)
         .then((info) => {
@@ -128,24 +131,5 @@ subscriptionController.scheduleEmails = (req, res, next) => {
       console.log(`Email ${restaurant} sent for ${name}`)
   }
   return next();
-  // for (let i = 0; i < 1; i++){
-  //   const mailOptions = {
-  //     from: 'contact.onogainz@gmail.com',
-  //     to: 'joselorenzo.guevara@gmail.com',
-  //     subject: `Ono-Gainz Reminder #${i}`,
-  //     text: 'Get Your Gainz Before It\'s Too Late!'
-  //   }
-
-  //   const job = new CronJob('00 50 18 * * *', () => {
-  //     transporter.sendMail(mailOptions)
-  //     .then((info) => {
-  //       console.log(info);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   });
-  //   job.start();
-  // }
 };
 module.exports = subscriptionController;
