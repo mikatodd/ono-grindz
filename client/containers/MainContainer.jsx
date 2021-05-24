@@ -14,10 +14,7 @@ const MainContainer = () => {
 
 
   return (
-    <div className="main-container">
-      <div className="header-container">
-        <h1>Ono Grindz</h1>
-      </div>
+    <div>
       <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation} />
       <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation} />
     </div>

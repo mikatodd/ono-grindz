@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === 'production'){
 // body parser
 app.use(express.json());
 
+
 // API Router: any requests that start with '/api' will be re-routed
 app.use('/api', apiRouter);
 

@@ -3,12 +3,11 @@ const db = require('../models/dbModels');
 const app = express();
 const yelp = require('yelp-fusion');
 const client = yelp.client('FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx');
-const searchControllers = {};
 
+const searchControllers = {};
 
 //get request to Yelp API for business IDs
 searchControllers.sendUserSearch = (req, res, next) => {
-  console.log('USER SEARCH HIT!');
   console.log(req.body);
   let { location, categories } = req.body;
   location = location.toLowerCase();
@@ -34,7 +33,6 @@ searchControllers.sendUserSearch = (req, res, next) => {
   })
 
 };
-
 
 const functionWithPromise = item => {
   return Promise.resolve(item)
