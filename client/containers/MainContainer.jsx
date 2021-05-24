@@ -18,10 +18,11 @@ const MainContainer = () => {
       <div className="header-container">
         <h1>Ono Grindz</h1>
       </div>
-      <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
-      <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} />
+      <SearchContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation} />
+      <DisplayContainer restaurants={restaurants} setRestaurants={setRestaurants} email={email} setEmail={setEmail} location={location} setLocation={setLocation} />
     </div>
   )
+
 }
 
 export default MainContainer;
