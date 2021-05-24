@@ -5,8 +5,9 @@ const SearchContainer = (props) => {
 
   return (
     <div>
-      {/* <h1>Search Container</h1> */}
-      <SearchCreator restaurants={props.restaurants} setRestaurants={props.setRestaurants} email={props.email} setEmail={props.setEmail} />
+      <div className="header-container">
+      <SearchCreator restaurants={props.restaurants} setRestaurants={props.setRestaurants} email={props.email} setEmail={props.setEmail} location={props.location} setLocation={props.setLocation} />
+      </div>
     </div>
   )
 }

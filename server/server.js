@@ -18,11 +18,17 @@ if (process.env.NODE_ENV === 'production'){
   });
 }
 
-//body parser
+// body parser
 app.use(express.json());
 
-//routes
+
+// API Router: any requests that start with '/api' will be re-routed
 app.use('/api', apiRouter);
+
+// 404 handler
+app.use('/', (req, res) => {
+  res.status(404).send('404 Not Found');
+});
 
 // global error handler
 app.use('/',(err, req, res, next) => {
@@ -33,11 +39,6 @@ app.use('/',(err, req, res, next) => {
   };
   const errorObj = Object.assign(defaultErr, err);
   res.status(errorObj.status).send(errorObj.message);
-});
-
-// 404 handler
-app.use('/', (req, res) => {
-  res.status(404).send('the 404 hit');
 });
 
 // listening for the port

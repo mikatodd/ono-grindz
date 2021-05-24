@@ -3,13 +3,12 @@ const db = require('../models/dbModels');
 const app = express();
 const yelp = require('yelp-fusion');
 const client = yelp.client('FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx');
+
 const searchControllers = {};
-
-// const { category, location, gmail, id } = req.body;
-
 
 //get request to Yelp API for business IDs
 searchControllers.sendUserSearch = (req, res, next) => {
+  console.log(req.body);
   let { location, categories } = req.body;
   location = location.toLowerCase();
   categories = categories.toLowerCase();
@@ -18,7 +17,7 @@ searchControllers.sendUserSearch = (req, res, next) => {
     term: 'restaurants',
     location: location,
     categories: categories,
-    limit: 5,
+    limit: 9,
   })
   .then((data) => {
     return JSON.parse(data.body);
@@ -27,11 +26,12 @@ searchControllers.sendUserSearch = (req, res, next) => {
     const { businesses } = data;
     const results = businesses.map(obj => obj.id)
     res.locals.ids = results;
-    next()
+    return next(); // invoking the next callback function
   })
   .catch(err => {
-    console.log(err, 'error')
+    return next('Error: error in searchControllers.sendUserSearch')
   })
+
 };
 
 const functionWithPromise = item => {
@@ -49,12 +49,11 @@ searchControllers.sendID = (req, res, next) => {
       for(let i = 0; i < data.length; i++){
         obj[i] = data[i].jsonBody
      }
-     //console.log('THIS IS OBJ',obj)
       res.locals.details = obj;
-      next()
+      return next()
     })
     .catch((err)=>{
-      console.log(err, 'error')
+      return next(err);
     })
   };
 

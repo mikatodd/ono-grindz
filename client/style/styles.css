@@ -1,24 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat&display=swap');
+
+.main-container {
+  background: #f4f1de;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+h1 {
+  color: #c8553d;
+  font-family: 'Monoton', cursive;
+  font-size: 75px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  color: #588b8b;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+input {
+  width: 250px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #588b8b;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .restaurantCard {
+  font-size: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 50%;
-  height: 100%;
-  margin: 0;
-  border-radius: 5px;
+  width: auto;
+  height: 80%;
+  border-radius: 8px;
+  background-color: white;
 }
-.avatar{
-  width: 100px;
-  height: 100px;
+
+.displayContainer {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto); */
+  margin-top: 50px;
 }
+
+.restaurantContainer {
+  grid-column: 0 / 1;
+  grid-row: 0 / 2;
+}
+
+
+img {
+  height:50%;
+  width:100%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.restaurantCard {
+  background-color: #fff;
+}
+
 .restaurantCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .restaurantInfoContainer {
-  padding: 2px 16px;
+  padding: 4px 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-btn {
+  margin-top: 30px;
 }
 
 .cardContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 40px;
+  justify-content: center;
+  height: 3fr;
+}
+
+
+.subscribe-container {
+  display: flex;
+  justify-content: center;
 }
