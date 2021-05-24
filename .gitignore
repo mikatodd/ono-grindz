@@ -1,5 +1,5 @@
 node_modules
-client/security
+security
 build/*.js
 npm-debug.log
 .DS_Store
