@@ -1,3 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat&display=swap');
+
+.main-container {
+  background: #f4f1de;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  color: #c8553d;
+  font-family: 'Monoton', cursive;
+  font-size: 75px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+}
+
+label {
+  color: #588b8b;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+input {
+  width: 250px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: 1px solid #588b8b;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .restaurantCard {
   font-size: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -6,19 +44,23 @@
   height: auto;
   border-radius: 8px;
 }
+
 .displayContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, auto);
-  margin-top:50px;
+  margin-top: 50px;
 }
+
 .restaurantContainer {
   grid-column: 0 / 1;
   grid-row: 0 / 2;
 }
+
 .mapContainer {
   grid-column: 1 / 2;
 }
+
 img {
   height:50%;
   width:100%;
@@ -38,5 +80,6 @@ img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 20px;
   height: 3fr;
 }
