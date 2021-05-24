@@ -17,8 +17,6 @@ const anAsyncFunction = async item => {
 
 //get request to Yelp API for business IDs
 searchControllers.sendUserSearch = (req, res, next) => {
-  console.log('SEND USER SEARCH');
-  console.log('BODY: ', req.body);
   let { location, categories } = req.body;
   location = location.toLowerCase();
   categories = categories.toLowerCase();
@@ -29,19 +27,12 @@ searchControllers.sendUserSearch = (req, res, next) => {
     limit: 6,
   })
   .then((data) => {
-    // return JSON.parse(data.body);
-    console.log('IN CLIENT SEARCH');
-    console.log(data.body);
     return JSON.parse(data.body);
   })
   .then((data)=>{
-    console.log('IN CLIENT SEARCH 2');
-    console.log(data.businesses);
     const { businesses } = data;
     Promise.all(businesses.map(obj => anAsyncFunction(obj.id)))
     .then((results) => {
-      console.log('INSIDE PROMISE');
-      console.log('results', results)
       res.locals.ids = results
       return next()
     }
@@ -54,11 +45,9 @@ searchControllers.sendUserSearch = (req, res, next) => {
 }
 
 searchControllers.sendID = (req, res, next) => {
-  console.log('IN SEND ID');
    Promise.all(res.locals.ids.map(id => anAsyncFunction(client.business(id))))
     .then((data) => {
       const obj = {};
-      console.log('HELLLOOOOO');
       for(let i = 0; i < data.length; i++){
         obj[i] = data[i].jsonBody
      }

@@ -14,7 +14,10 @@ const CronJob = require('cron').CronJob;
 // import yelp-fusion api module, create new client which we can use to query the api
 const yelp = require('yelp-fusion');
 const client = yelp.client('FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx');
-
+//import db model
+const db = require('../models/dbModels');
+//inmport moongoose
+const mongoose = require('mongoose');
 // NodeMailer: initialize a nodemailer Transporter, save into variable transporter. We can use the transporter to send emails.
 
 
@@ -52,21 +55,19 @@ const anAsyncFunction = async item => {
 subscriptionController.getDetails = (req, res, next) => {
   // get all restaurant id keys from the client's request, store them in an array
   const ids = Object.keys(req.body.subscriptions);
-
-  console.log('RESTAURANT IDs: ', ids);
   // Promise-all, i.e., wait until all promises are resolved, before moving onto then statement.
   Promise.all(ids.map(id => anAsyncFunction(client.business(id))))
-  .then((data) => {
-    const obj = {};
-    for(let i = 0; i < data.length; i++){
-      obj[i] = data[i].jsonBody
-    }
-    res.locals.details = obj;
-    return next()
-  })
-  .catch((err)=>{
-    return next(err);
-  })
+    .then((data) => {
+      const obj = {};
+      for (let i = 0; i < data.length; i++) {
+        obj[i] = data[i].jsonBody
+      }
+      res.locals.details = obj;
+      return next()
+    })
+    .catch((err) => {
+      return next(err);
+    })
 };
 
 
@@ -78,7 +79,7 @@ subscriptionController.scheduleEmails = (req, res, next) => {
   const customerEmail = req.body.email;
 
   for (const restaurant in restaurants) {
-    const { name, image_url, url, display_phone, hours} = details[restaurant];
+    const { name, image_url, url, display_phone, hours } = details[restaurant];
     const { address1 } = details[restaurant].location;
     const { city } = details[restaurant].location;
     // Determining which date of week it is (e.g., 0 -6)
@@ -105,20 +106,19 @@ subscriptionController.scheduleEmails = (req, res, next) => {
     const mins = hours[0].open[day].end.substring(2, 4);
 
     // subtract 1 from hours, because we want to notify client 1 hour before close
-    if (hrs !== "00"){
+    if (hrs !== "00") {
       hrs = (parseInt(hrs) - 1).toString().padStart(2, '0');
     }
-    else{
+    else {
       hrs = '23';
     }
-    console.log(hrs);
     // console.log(`00 ${mins} ${hrs} * * *`)
     // Cron syntax
     // '*     *     *     *     *     *'
     // secs  mins  hrs  days  month  dayofweek(sun-sat, 0 - 6)
     // 00 00 16 * * *
     // send at 4:00:00PM every day, of every month, every day of the week
-    const job = new CronJob(`00 ${mins} ${hrs} * * *`, () => {
+    const job = new CronJob(`00 51 16 * * *`, () => {
       transporter.sendMail(mailOptions)
         .then((info) => {
           console.log(info);
@@ -126,10 +126,65 @@ subscriptionController.scheduleEmails = (req, res, next) => {
         .catch((error) => {
           console.log(error);
         });
-      });
-      job.start();
-      console.log(`Email ${restaurant} scheduled to be sent for ${name}`)
+    });
+    job.start();
+    console.log(`Email ${restaurant} scheduled to be sent for ${name}`)
   }
   return next();
+};
+
+
+subscriptionController.createUser = (req,res,next) => {
+  const subs = {};
+  for(const [key, value] of Object.entries(res.locals.details)){
+    // console.log('key',key);
+    // console.log('value',value);
+    subs[value.id] = value;
+  }
+  
+  const query = db.User.findOneAndUpdate({email: req.body.email}, { email:req.body.email, subscription: subs},{upsert: true, new: true});
+  
+  query.then((data)=>{
+    console.log(data)
+    return next();
+  })
+  .catch((err)=>{
+    //pass something into next to go to global error handler
+    return next(err)
+  })
+};
+
+// method to get one user document
+subscriptionController.findUser = (req,res,next) => {
+  const {email} = req.body
+  const query = db.User.find({email: email}, {useFindAndModify: false})
+  query.then((data)=>{
+    res.locals.user = data;
+    return next()
+  })
+  .catch((err)=>{
+    console.log(err)
+    return next(err)
+  })
+
+};
+
+// Method to delete subscription in user object
+subscriptionController.deleteSubscription = (req,res,next) => {
+  // Create a find query that filters by email, save the returned document into a variable, this is already done by subscriptionController.findUser
+  // const document = res.locals.user;
+  // const {id} = req.body
+  // // Manually go into that saved document, remove the restaurant object to be deleted
+  // delete document.subscription[id];
+
+  // console.log(document);
+  return next();
+  // // do a find one an update
+  // const {email} = req.body
+  // const {id} = req.body
+  // const query = db.User.find({email: email})
+  // // query.then((data) => {
+    
+  // // })
 };
 module.exports = subscriptionController;

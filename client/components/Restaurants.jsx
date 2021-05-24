@@ -23,7 +23,6 @@ const Restaurants = (props) => {
   const handleClick = (e) => {
     // from the event object, locate the button that was click, more specifically, the restaurant id
     const restaurantId = e.target.name;
-    console.log(restaurantId);
 
     // copy the local state variable subscriptions, key word is copy, remember objects and arrays are composite data types which are passed by reference.
     // if we were to initialize subscriptionState to reference subscriptions, and we reassigned or updated its values without using setSubscriptions ,unsure what the implications would be
@@ -37,12 +36,7 @@ const Restaurants = (props) => {
       delete subscriptionState[restaurantId];
     }
 
-    console.log(subscriptionState);
     setSubscriptions(subscriptionState);
-    console.log('subscriptions: ', subscriptions);
-    e.target.value = 'YOOOOO'; //subscriptions[restaurantId] === true ? "Selected!" : "Select";
-    console.log(e.target.value);
-    console.log(e.target);
   };
 
   const convertTime = (time) => {
@@ -82,6 +76,7 @@ const Restaurants = (props) => {
     return <Restaurant id={id} key={`restaurant_${id}`} name={name} coordinates={coordinates} display_phone={display_phone} phone={phone} image_url={image_url} location={location} rating={rating} url={url} schedule={schedule} handleClick={handleClick} subscribed={Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select"} />
   })
 
+  
   const subscribe = () => {
     console.log('Subscribed: ', subscriptions);
 

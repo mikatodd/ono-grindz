@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 
 .main-container {
   background: #f4f1de;
@@ -41,10 +42,12 @@ input {
   font-size: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: auto;
-  height: 80%;
+  width: 70%;
+  height: 70%;
   border-radius: 8px;
   background-color: white;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
 }
 
 .displayContainer {
@@ -82,6 +85,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 10px
 }
 
 .card-btn {
@@ -102,3 +106,25 @@ img {
   display: flex;
   justify-content: center;
 }
+
+
+/* @media screen and (max-width: 1024px) {
+  html {
+    font-size: .75em;
+  }
+  
+  .header-container {
+    display: flex;
+  
+    align-items: center;
+  }
+  .charBtnOptions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .primaryButton {
+    margin-bottom: 10px;
+  }
+} */
