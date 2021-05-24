@@ -90,19 +90,19 @@ const SearchCreator = (props) => {
 
   // Render our react component
   return (
-    <div>
+    <div className="search-container">
       <form>
-        <label>
+        <label className="category-label">
           Category:
-          <input type="text" id="category" placeholder="e.g.,sushi, pizza, etc"required/>
+          <input type="text" id="category" placeholder="e.g.,sushi, pizza, etc" required />
         </label>
         <label>
           Location:
-          <input type="text" id="location" placeholder="e.g., Los Angeles, CA" required/>
+          <input type="text" id="location" placeholder="e.g., Los Angeles, CA" required />
         </label>
         <label>
           Email:
-          <input type="text" id="email" placeholder="theRealCharChar@werewolves.com"type="email" required/>
+          <input type="text" id="email" placeholder="theRealCharChar@werewolves.com" type="email" required />
         </label>
 
         <input type="button" value="Submit" onClick={handleClick} />

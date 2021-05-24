@@ -11,7 +11,7 @@ const Restaurants = (props) => {
   // declare a local state variable, subscriptions, initialize to empty array
   // Note: subscriptions will keep track of which restaurants the user will actually want to subscribe to. 
   // we will ultimately send off the array of subscriptions back to the server so that they can configure automatic email notifications to be sent to user when restaurant is closing in an hour.
-  const [ subscriptions, setSubscriptions ] = useState({});
+  const [subscriptions, setSubscriptions] = useState({});
   console.log('SUBSCRIPTIONS: ', subscriptions);
 
   // React Hooks: useEffect() is a lifecycle method similar to React Class Components (i.e. ComponentWillMount(), ComponentDidMount(), ComponentWillUnmount()). For now will we just have it console log, so that we know whenever this is invoked for our understanding. 
@@ -27,13 +27,13 @@ const Restaurants = (props) => {
 
     // copy the local state variable subscriptions, key word is copy, remember objects and arrays are composite data types which are passed by reference.
     // if we were to initialize subscriptionState to reference subscriptions, and we reassigned or updated its values without using setSubscriptions ,unsure what the implications would be
-    const subscriptionState = {...subscriptions};
+    const subscriptionState = { ...subscriptions };
 
     // checks whether subscriptionState (& subscription local state variable) have the restaurant Id already. This will simply add the restaurant id, and set to true, otherwise it will act as a 'switch' to delete the restaurant Id from the subscriptions object;
     if (!Object.prototype.hasOwnProperty.call(subscriptionState, restaurantId)) {
       subscriptionState[restaurantId] = true;
     }
-    else{
+    else {
       delete subscriptionState[restaurantId];
     }
 
@@ -79,7 +79,7 @@ const Restaurants = (props) => {
     const schedule = [start, end];
 
     // return a Restaurant component with necessary attributes for props
-    return <Restaurant id = {id} key={`restaurant_${id}`} name = {name} coordinates = {coordinates} display_phone = {display_phone} phone = {phone} image_url = {image_url} location = {location} rating = {rating} url = {url} schedule = {schedule} handleClick = {handleClick} subscribed = {Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select" }/>
+    return <Restaurant id={id} key={`restaurant_${id}`} name={name} coordinates={coordinates} display_phone={display_phone} phone={phone} image_url={image_url} location={location} rating={rating} url={url} schedule={schedule} handleClick={handleClick} subscribed={Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select"} />
   })
 
   const subscribe = () => {
@@ -94,7 +94,7 @@ const Restaurants = (props) => {
     fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ 
+      body: JSON.stringify({
         subscriptions: subscriptions,
         email: props.email,
       }),
@@ -112,7 +112,7 @@ const Restaurants = (props) => {
 
   return (
     <div>
-      <div className = "cardContainer">
+      <div className="cardContainer">
         {restaurants}
       </div>
       <div>
