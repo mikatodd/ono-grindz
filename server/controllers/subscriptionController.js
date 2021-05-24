@@ -9,7 +9,7 @@ const gmail = require('../../security/gmail');
 // importing cron npm module. Cron is a tool that allows us to execute something on a schedule
 // https://www.npmjs.com/package/cron
 // http://crontab.org/ --> for information on Cron schedule syntax
-const CronJob = require('cron').CronJob; 
+const CronJob = require('cron').CronJob;
 
 // import yelp-fusion api module, create new client which we can use to query the api
 const yelp = require('yelp-fusion');
@@ -71,7 +71,7 @@ subscriptionController.getDetails = (req, res, next) => {
 
 
 subscriptionController.scheduleEmails = (req, res, next) => {
-  
+
   // specific restaurant details pulled from getDetails
   const { details } = res.locals;
   const restaurants = Object.keys(details);
@@ -127,8 +127,8 @@ subscriptionController.scheduleEmails = (req, res, next) => {
           console.log(error);
         });
       });
-      // job.start();
-      console.log(`Email ${restaurant} sent for ${name}`)
+      job.start();
+      console.log(`Email ${restaurant} scheduled to be sent for ${name}`)
   }
   return next();
 };
