@@ -6,7 +6,7 @@ const SearchCreator = (props) => {
   // React Hooks: declaring two local state variables called categories and location. Unsure if this is necessary to maintain here, maybe we can maintain at higher level.
   // If we do move this to a HOC (higher order container) we will need to pass down the HOC's local state variables via props and update our handleClick method nested invocations, e.b. setCategory(categories) => props.setCategory(categories)
   const [categories, setCategory] = useState('');
-  const [location, setLocation] = useState('');
+  // const [location, setLocation] = useState('');
 
   const handleClick = (event) => {
     // pull values from html input tags
@@ -16,11 +16,11 @@ const SearchCreator = (props) => {
 
     // update local state variables categories and location
     setCategory(categories);
-    setLocation(location);
+    // setLocation(location);
 
     // update parent's (MainContainer) local state container
     props.setEmail(email);
-
+    props.setLocation(location);
     // automatically clears the inputs after the user clicks submit. Note: this is just at stylistic/UI feature so that if the user wants to change input, they will not need to erase their previous submission
     document.getElementById('category').value = '';
     document.getElementById('location').value = '';
