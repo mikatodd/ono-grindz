@@ -9,6 +9,7 @@ searchControllers.sendUserSearch,
 searchControllers.sendID,
 (req, res) => {
   const { details } = res.locals;
+  console.log('LAST MIDDLEWARE')
   return res.status(200).json({ details })
 }
 );
@@ -18,7 +19,7 @@ searchControllers.sendID,
 
 // we will also need to schedule automatic emails to be sent out here for each restaurant using the NodeMailer and Cron node modules
 
-router.use('/subscribe', 
+router.use('/subscribe',
   subscriptionController.getDetails,
   subscriptionController.scheduleEmails,
   (req, res) => {
