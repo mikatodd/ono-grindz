@@ -16,9 +16,6 @@
   grid-column: 0 / 1;
   grid-row: 0 / 2;
 }
-.mapContainer {
-  grid-column: 1 / 2;
-}
 img {
   height:50%;
   width:100%;
