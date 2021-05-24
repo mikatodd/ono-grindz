@@ -7,6 +7,7 @@
 .header-container {
   display: flex;
   justify-content: center;
+  align-content: center;
 }
 
 h1 {
@@ -47,9 +48,9 @@ input {
 }
 
 .displayContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto); */
   margin-top: 50px;
 }
 
@@ -58,9 +59,6 @@ input {
   grid-row: 0 / 2;
 }
 
-/* .mapContainer {
-  grid-column: 1 / 2;
-} */
 
 img {
   height:50%;
@@ -69,18 +67,38 @@ img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
+
+.restaurantCard {
+  background-color: #fff;
+}
+
 .restaurantCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
 .restaurantInfoContainer {
-  padding: 2px 16px;
+  padding: 4px 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-btn {
+  margin-top: 30px;
 }
 
 .cardContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 20px;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 40px;
+  justify-content: center;
   height: 3fr;
+}
+
+
+.subscribe-container {
+  display: flex;
+  justify-content: center;
 }

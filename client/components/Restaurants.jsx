@@ -115,8 +115,8 @@ const Restaurants = (props) => {
       <div className="cardContainer">
         {restaurants}
       </div>
-      <div>
-        <input type="button" value="Subscribe" onClick={subscribe} />
+      <div className="subscribe-container">
+        <input type="button" className="subscribe-btn" value="Subscribe" onClick={subscribe} />
       </div>
     </div>
   )
