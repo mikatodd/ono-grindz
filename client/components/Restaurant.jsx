@@ -13,7 +13,7 @@ const Restaurant = (props) => {
         <div className="restaurantInfoContainer">
           <h4><b>{props.name}</b></h4>
           <p>Address: {props.location.address1}</p>
-          <p>Hours: {props.schedule[0]} - props.schedule[1]</p>
+          <p>Hours: {props.schedule[0]} - {props.schedule[1]}</p>
           <p>Phone: {props.display_phone}</p>
           <p>Rating: {props.rating}</p>
 
