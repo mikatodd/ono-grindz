@@ -90,8 +90,6 @@ const SearchCreator = (props) => {
 
   // Render our react component
   return (
-    <div className="main-container">
-      <h1>Ono Grindz</h1>
       <div className="search-container">
         <form>
           <label className="category-label">
@@ -110,7 +108,6 @@ const SearchCreator = (props) => {
           <input type="button" value="Submit" onClick={handleClick} />
         </form>
       </div>
-    </div>
   )
 }
 
