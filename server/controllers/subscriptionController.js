@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 
 // importing separate file where gmail username and password are stored, this file and the entire security folder has been added to .gitignore for security purposes
 const gmail = require('../../security/gmail');
-
+const API_KEY = require('../../security/key')
 // importing cron npm module. Cron is a tool that allows us to execute something on a schedule
 // https://www.npmjs.com/package/cron
 // http://crontab.org/ --> for information on Cron schedule syntax
@@ -13,14 +13,16 @@ const CronJob = require('cron').CronJob;
 
 // import yelp-fusion api module, create new client which we can use to query the api
 const yelp = require('yelp-fusion');
-const client = yelp.client('FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx');
+const client = yelp.client(API_KEY.key);
 //import db model
 const db = require('../models/dbModels');
 //inmport moongoose
 const mongoose = require('mongoose');
+
 // NodeMailer: initialize a nodemailer Transporter, save into variable transporter. We can use the transporter to send emails.
-
-
+// Useful documentation
+// https://nodemailer.com/about/
+// https://www.npmjs.com/package/nodemailer
 // function to convert time to readable format
 const convertTime = (time) => {
   const hours = (parseInt(time.substring(0, 2)) % 12) === 0 ? 1 : time.substring(0, 2) % 12;
@@ -118,7 +120,13 @@ subscriptionController.scheduleEmails = (req, res, next) => {
     // secs  mins  hrs  days  month  dayofweek(sun-sat, 0 - 6)
     // 00 00 16 * * *
     // send at 4:00:00PM every day, of every month, every day of the week
-    const job = new CronJob(`00 51 16 * * *`, () => {
+    // https://www.npmjs.com/package/cron
+    // http://crontab.org/
+    // https://crontab.guru/#00_21_1_2
+    // https://blog.greenroots.info/send-and-schedule-e-mails-from-a-nodejs-app-ck0l6usms000v4ns1lft6lauw?guid=none&deviceId=eacc572d-a2c6-4f73-b554-d49744af5d13
+
+    // Creates a new cron job with a schedule of hrs and mins (1 hour before restaurant closes)
+    const job = new CronJob(`00 ${mins} ${hrs} * * *`, () => {
       transporter.sendMail(mailOptions)
         .then((info) => {
           console.log(info);
@@ -137,15 +145,13 @@ subscriptionController.scheduleEmails = (req, res, next) => {
 subscriptionController.createUser = (req,res,next) => {
   const subs = {};
   for(const [key, value] of Object.entries(res.locals.details)){
-    // console.log('key',key);
-    // console.log('value',value);
     subs[value.id] = value;
   }
-  
-  const query = db.User.findOneAndUpdate({email: req.body.email}, { email:req.body.email, subscription: subs},{upsert: true, new: true});
+  // When using findOneAndUpdate()/Delete() need to pass in option useFindAndModify: false
+  // https://mongoosejs.com/docs/deprecations.html#findandmodify
+  const query = db.User.findOneAndUpdate({email: req.body.email}, { email:req.body.email, subscription: subs},{upsert: true, new: true, useFindAndModify: false});
   
   query.then((data)=>{
-    console.log(data)
     return next();
   })
   .catch((err)=>{
@@ -171,20 +177,13 @@ subscriptionController.findUser = (req,res,next) => {
 
 // Method to delete subscription in user object
 subscriptionController.deleteSubscription = (req,res,next) => {
-  // Create a find query that filters by email, save the returned document into a variable, this is already done by subscriptionController.findUser
-  // const document = res.locals.user;
-  // const {id} = req.body
-  // // Manually go into that saved document, remove the restaurant object to be deleted
-  // delete document.subscription[id];
+  // "QUICK AND DIRTY" Solution - Jeff Chen
 
-  // console.log(document);
+  // Create a find query that filters by email, save the returned document into a variable, this is already done by subscriptionController.findUser
+
+  // Manually go into that saved document, remove the restaurant object to be deleted in JAVASCRIPT
+
+  // Do a findOneAndUpdate and insert the updated object with the deleted restaurant id for the same email.
   return next();
-  // // do a find one an update
-  // const {email} = req.body
-  // const {id} = req.body
-  // const query = db.User.find({email: email})
-  // // query.then((data) => {
-    
-  // // })
 };
 module.exports = subscriptionController;

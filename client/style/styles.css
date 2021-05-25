@@ -37,6 +37,11 @@ input {
   margin-left: 20px;
   margin-right: 20px;
 }
+button .input {
+  border-color: #c8553c;
+  color: #c8553c;
+  background-color: white;
+}
 
 .restaurantCard {
   font-size: 10px;
@@ -107,24 +112,32 @@ img {
   justify-content: center;
 }
 
+.Select {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  border-color: #c8553c;
+  color: #c8553c;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: white;
+  padding: 10px 10px;
+  margin-top: 30px;
+}
 
-/* @media screen and (max-width: 1024px) {
-  html {
-    font-size: .75em;
-  }
-  
-  .header-container {
-    display: flex;
-  
-    align-items: center;
-  }
-  .charBtnOptions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .primaryButton {
-    margin-bottom: 10px;
-  }
-} */
+.Select:hover{
+  color: white;
+  background-color:#c8553c;
+}
+.Selected {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  border-color: #c8553c;
+  color: white;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #c8553c;
+  padding: 10px 10px;
+  margin-top: 30px;
+}

@@ -17,7 +17,7 @@ const Restaurant = (props) => {
           <span className="restaurantDetails"><b>Phone:</b> {props.display_phone}</span>
           <span className="restaurantDetails"><b>Rating:</b> {props.rating}</span>
         </div>
-        <input type="button" className="card-btn" value={props.subscribed} name={props.id} onClick={props.handleClick} selected={props.subscribed} />
+        <input type="button" className={props.subscribed} value={props.subscribed} name={props.id} onClick={props.handleClick} selected={props.subscribed} />
       </div>
     </div>
   )
