@@ -2,6 +2,9 @@ import { set } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import TempComponent2 from './tempComponent2.jsx';
 
+
+// Practice components to learn how react hooks work, use with other temp component!
+
 // functional component
 const TempComponent1 = (props) => {
 
