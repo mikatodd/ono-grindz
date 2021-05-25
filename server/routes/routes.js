@@ -9,7 +9,6 @@ searchControllers.sendUserSearch,
 searchControllers.sendID,
 (req, res) => {
   const { details } = res.locals;
-  console.log('LAST MIDDLEWARE')
   return res.status(200).json({ details })
 }
 );
@@ -22,14 +21,20 @@ searchControllers.sendID,
 router.use('/subscribe',
   subscriptionController.getDetails,
   subscriptionController.scheduleEmails,
+  subscriptionController.createUser,
   (req, res) => {
     res.status(200).json('Subscribed!')
   }
 )
 //will be sending the user all there subs
-router.get('/')
+// router.get('/')
 //process client unsubscribe
-router.delete('/unsubscribe')
+router.post('/unsubscribe',
+  subscriptionController.deleteSubscription,
+  (req, res) => {
+    res.status(200).send('document deleted')
+  }
+)
 
 module.exports = router;
 

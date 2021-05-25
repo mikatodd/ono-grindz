@@ -35,11 +35,11 @@ const restaurantSchema = new Schema({
 });
 
 const userSchema = new Schema({
-  email: { type: String, required: true },
-  subscription: [restaurantSchema]
+  email: { type: String, required: true, unique: true},
+  subscription: {},
   });
 
-const User = mongoose.model('Grindz', userSchema);
+const User = mongoose.model('User', userSchema);
 const Restaurants = mongoose.model('Restaurants', restaurantSchema);
 
 module.exports = {
