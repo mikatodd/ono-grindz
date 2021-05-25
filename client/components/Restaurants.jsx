@@ -73,7 +73,7 @@ const Restaurants = (props) => {
     const schedule = [start, end];
 
     // return a Restaurant component with necessary attributes for props
-    return <Restaurant id={id} key={`restaurant_${id}`} name={name} coordinates={coordinates} display_phone={display_phone} phone={phone} image_url={image_url} location={location} rating={rating} url={url} schedule={schedule} handleClick={handleClick} subscribed={Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select"} />
+    return <Restaurant id={id} key={`restaurant_${id}`} name={name} coordinates={coordinates} display_phone={display_phone} phone={phone} image_url={image_url} location={location} rating={rating} url={url} schedule={schedule} handleClick={handleClick} subscribed={Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select"} className = {Object.prototype.hasOwnProperty.call(subscriptions, id) && subscriptions[id] === true ? "Selected" : "Select"} />
   })
 
   
@@ -103,6 +103,8 @@ const Restaurants = (props) => {
       .catch((err) => {
         console.log(err);
       })
+    document.getElementById('subscribe-button').value = "Subscribed";
+    document.getElementById('subscribe-button').className = "Selected";
   }
 
   return (
@@ -111,7 +113,7 @@ const Restaurants = (props) => {
         {restaurants}
       </div>
       <div className="subscribe-container">
-        <input type="button" className="subscribe-btn" value="Subscribe" onClick={subscribe} />
+        <input type="button" className="Select" id = "subscribe-button" value="Subscribe" onClick={subscribe} />
       </div>
     </div>
   )

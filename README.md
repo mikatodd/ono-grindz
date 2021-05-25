@@ -1,9 +1,4 @@
-This is a repository for a solo project. I want to solidify my understanding on some new technologies I have learned:
-
-1) React / Redux
-2) Express
-3) MongoDB
-4) Authentication
+This is a repository for our Ono Grindz project. 
 
 TO GET STARTED:
 - run ```npm install``` , we need to do this because our npm dependencies 

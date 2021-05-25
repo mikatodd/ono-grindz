@@ -1,12 +1,18 @@
 const express = require('express');
 const db = require('../models/dbModels');
 const app = express();
+
+// read up on the yelp-fusion npm package - necessary to use yelp.search and yelp.business in order to access API since localhost cannot make requests to Yelp API
 const yelp = require('yelp-fusion');
+
+// For security purposes, you should keep your API keys, usernames, and passwords in a separate file and add them to your .gitignore. Github and Google are automatically alerted when a private API key is exposed on a public repo
+// Simply create a security folder in the root director, and create a key.js file which will module.export the api keys, passwords, etc.
 const API_KEY = require('../../security/key')
-const client = yelp.client('FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx');
+const client = yelp.client(API_KEY.key);
 
 const searchControllers = {};
 
+// helper functions for the Promise.all 
 const functionWithPromise = item => {
   return Promise.resolve(item)
 }
@@ -44,6 +50,8 @@ searchControllers.sendUserSearch = (req, res, next) => {
   })
 }
 
+// https://javascript.info/promise-api#:~:text=..%5D)%3B-,Promise.,their%20results%20becomes%20its%20result
+// Promise.all wraps around an array; necessary to pass the full results of the map callback 
 searchControllers.sendID = (req, res, next) => {
    Promise.all(res.locals.ids.map(id => anAsyncFunction(client.business(id))))
     .then((data) => {
@@ -58,14 +66,5 @@ searchControllers.sendID = (req, res, next) => {
       return next(err);
     })
   };
-
-//subscribe
-
-
-//Client ID
-//TGFWJiF1cChXSQp_usubUQ
-
-//API Key
-//FcwzVNzsVl_uQ2QdwZ5bkNZZp2d5zqBOB42D2SAzmtDgCLK0XxeClOD9F4aFyZcn58z0EjAKr8oRCKVje3z2hJwUHKbwUpOAYYoN_wAVYhinn0a0PN0YCX4txlCpYHYx
 
 module.exports = searchControllers

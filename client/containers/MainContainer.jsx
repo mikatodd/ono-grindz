@@ -5,6 +5,7 @@ import DisplayContainer from './DisplayContainer.jsx';
 
 const MainContainer = () => {
 
+  // Local State Variables
   const [restaurants, setRestaurants] = useState({});
   const [email, setEmail] = useState('');
   const [location, setLocation] = useState({

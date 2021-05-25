@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+
+// Practice components to learn how react hooks work, use with other temp component!
 const TempComponent2 = (props) => {
 
   useEffect(() => {
